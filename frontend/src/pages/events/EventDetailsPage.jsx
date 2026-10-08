@@ -182,6 +182,7 @@ export function EventDetailsPage() {
             <Button variant="secondary" onClick={() => navigate(`/events/${id}/edit`)}><Edit3 size={15} aria-hidden="true" /> Edit Event</Button>
             <Button onClick={() => navigate(`/events/${id}/sessions`)}><CalendarDays size={15} aria-hidden="true" /> Manage Sessions</Button>
             <Button variant="secondary" onClick={() => navigate(`/events/${id}/sessions`)}><Users size={15} aria-hidden="true" /> Manage Speakers</Button>
+            <Button variant="secondary" onClick={() => navigate(`/events/${id}/registrations`)}><Users size={15} aria-hidden="true" /> View Registrations</Button>
           </>
         ) : null}
         {user?.role === 'attendee' ? <Link to={`/events/${id}/register`} className="eventforge-primary-link"><CreditCard size={15} aria-hidden="true" /> Register</Link> : null}

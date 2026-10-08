@@ -247,7 +247,10 @@ const serializeRegistration = (registration, includeTicket = false) => ({
   ticket: registration.ticket && typeof registration.ticket === 'object' && typeof registration.ticket.toObject === 'function'
     ? serializeTicket(registration.ticket)
     : registration.ticket?.toString() || registration.ticket,
-  attendee: registration.attendee?.toString() || registration.attendee,
+  // Preserve the populated attendee object (name, email, role) if available
+  attendee: registration.attendee && typeof registration.attendee === 'object' && registration.attendee.name
+    ? { _id: registration.attendee._id?.toString(), name: registration.attendee.name, email: registration.attendee.email, role: registration.attendee.role }
+    : registration.attendee?.toString() || registration.attendee,
   coupon: registration.coupon?.toString() || registration.coupon,
   cancelledBy: registration.cancelledBy?.toString() || registration.cancelledBy,
   ticketDetails: includeTicket ? registration.ticketDetails || null : undefined,

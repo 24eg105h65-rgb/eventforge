@@ -7,10 +7,29 @@ const notFound = require('./middleware/notFound');
 
 const app = express();
 
+const rawClientUrl = process.env.CLIENT_URL || '';
+const allowedOrigins = rawClientUrl
+  ? rawClientUrl.split(',').map((url) => url.trim().replace(/\/+$/, ''))
+  : ['http://localhost:5173', 'http://localhost:3000'];
+
 app.use(helmet());
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || false,
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+
+      const cleanOrigin = origin.replace(/\/+$/, '');
+      const isAllowed = allowedOrigins.some(
+        (allowed) => allowed === cleanOrigin || allowed === '*'
+      );
+
+      if (isAllowed || process.env.NODE_ENV !== 'production') {
+        // Return the normalized origin (no trailing slash) so the
+        // Access-Control-Allow-Origin header always matches exactly.
+        return callback(null, cleanOrigin);
+      }
+      return callback(new Error(`CORS policy blocked origin: ${origin}`));
+    },
     credentials: true,
   }),
 );

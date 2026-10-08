@@ -77,7 +77,7 @@ export function OrganizerRegistrationsPage() {
             {registrations.map((registration) => (
               <tr key={registration._id}>
                 <td><strong>{registration.registrationCode}</strong></td>
-                <td>{registration.attendee?.name || registration.attendeeDetails?.fullName || 'Unknown'}<br /><small>{registration.attendee?.email}</small></td>
+                <td>{registration.attendee?.name || registration.attendeeDetails?.fullName || 'Unknown'}<br /><small>{registration.attendee?.email || registration.attendeeDetails?.email || '—'}</small></td>
                 <td>{registration.ticket?.name}<br /><small>{registration.ticket?.type}</small></td>
                 <td>{registration.quantity}</td>
                 <td>{formatCurrency(registration.totalAmount, registration.currency)}</td>

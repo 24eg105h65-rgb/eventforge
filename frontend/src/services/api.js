@@ -1,7 +1,11 @@
 import axios from 'axios';
 
+const rawBase = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+// Normalize: strip trailing slashes so `/auth/register` always resolves correctly
+const baseURL = rawBase.replace(/\/+$/, '');
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
+  baseURL,
   headers: {
     'Content-Type': 'application/json',
   },

@@ -38,13 +38,23 @@ test.afterEach(async () => {
 });
 
 test('registers a user and hides the password', async () => {
-  const response = await request.post('/api/auth/register').send(demoUser);
+  const response = await request.post('/api/auth/register').send({
+    ...demoUser,
+    phone: '+1 555 0100',
+    interests: ['Design', 'Music'],
+  });
 
   assert.equal(response.status, 201);
   assert.equal(response.body.success, true);
   assert.equal(response.body.user.email, demoUser.email);
   assert.equal(response.body.user.password, undefined);
   assert.equal(response.body.user.role, 'organizer');
+  assert.equal(response.body.user.phone, '+1 555 0100');
+  assert.deepEqual(response.body.user.interests, ['Design', 'Music']);
+
+  const storedUser = await User.findById(response.body.user._id);
+  assert.equal(storedUser.phone, '+1 555 0100');
+  assert.deepEqual(storedUser.interests, ['Design', 'Music']);
 });
 
 test('rejects a duplicate email', async () => {

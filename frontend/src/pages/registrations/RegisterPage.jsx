@@ -4,11 +4,11 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { Button } from '../../components/ui/Button';
 import { getEvent } from '../../services/eventService';
-import { createRegistration, getEventCoupons, getEventTickets } from '../../services/phase5Service';
+import { createRegistration, getEventTickets } from '../../services/phase5Service';
 
 const formatCurrency = (value, currency = 'INR') => new Intl.NumberFormat('en-IN', { style: 'currency', currency, maximumFractionDigits: 0 }).format(value || 0);
 
-const emptyDetails = { fullName: '', email: '', phone: '', jobTitle: '' };
+const emptyDetails = { fullName: '', email: '', phone: '' };
 
 export function RegisterPage() {
   const { eventId } = useParams();
@@ -16,32 +16,24 @@ export function RegisterPage() {
   const { user } = useAuth();
   const [event, setEvent] = useState(null);
   const [tickets, setTickets] = useState([]);
-  const [coupons, setCoupons] = useState([]);
   const [ticketId, setTicketId] = useState('');
   const [quantity, setQuantity] = useState(1);
-  const [couponCode, setCouponCode] = useState('');
   const [attendeeDetails, setAttendeeDetails] = useState(emptyDetails);
-  const [notes, setNotes] = useState('');
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
   const [confirmation, setConfirmation] = useState(null);
 
   const selectedTicket = useMemo(() => tickets.find((ticket) => ticket._id === ticketId) || null, [tickets, ticketId]);
-  const applicableCoupon = useMemo(() => coupons.find((coupon) => coupon.code.toUpperCase() === couponCode.trim().toUpperCase() && coupon.active) || null, [coupons, couponCode]);
   const subtotal = selectedTicket ? selectedTicket.price * quantity : 0;
-  const discount = applicableCoupon && selectedTicket && subtotal >= (applicableCoupon.minimumAmount || 0)
-    ? (applicableCoupon.discountType === 'PERCENTAGE' ? subtotal * (applicableCoupon.discountValue / 100) : Math.min(applicableCoupon.discountValue, subtotal))
-    : 0;
-  const total = Math.max(subtotal - discount, 0);
+  const total = subtotal;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [eventResponse, ticketsResponse, couponsResponse] = await Promise.all([getEvent(eventId), getEventTickets(eventId), getEventCoupons(eventId)]);
+        const [eventResponse, ticketsResponse] = await Promise.all([getEvent(eventId), getEventTickets(eventId)]);
         setEvent(eventResponse.data);
         setTickets(ticketsResponse.data.filter((ticket) => ticket.active && ticket.remainingCount > 0));
-        setCoupons(couponsResponse.data);
         const initialTicket = new URLSearchParams(window.location.search).get('ticket');
         if (initialTicket) setTicketId(initialTicket);
       } catch (requestError) {
@@ -69,8 +61,6 @@ export function RegisterPage() {
         ticketId,
         quantity,
         attendeeDetails: { ...attendeeDetails, email: attendeeDetails.email || user?.email },
-        couponCode: couponCode.trim() || undefined,
-        notes: notes.trim() || undefined,
       });
       setConfirmation(response.data);
     } catch (requestError) {
@@ -106,6 +96,28 @@ export function RegisterPage() {
     );
   }
 
+  if (!tickets.length) {
+    return (
+      <div className="eventforge-event-page eventforge-page--form">
+        <header className="eventforge-page-header eventforge-page-header--compact">
+          <div>
+            <p className="eventforge-eyebrow">Register</p>
+            <h1>{event?.name || 'EVENT REGISTRATION'}</h1>
+          </div>
+          <Link to={`/events/${eventId}`} className="eventforge-primary-link"><ArrowLeft size={15} aria-hidden="true" /> Back to event</Link>
+        </header>
+        <div className="eventforge-form-panel eventforge-event-form">
+          <p style={{ color: 'var(--ef-text-muted, #aaa)', textAlign: 'center', padding: '2rem 0' }}>
+            No tickets are currently available for this event.
+          </p>
+          <div className="eventforge-form-actions">
+            <Link to={`/events/${eventId}`} className="eventforge-button eventforge-button--secondary">Back to event</Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="eventforge-event-page eventforge-page--form">
       <header className="eventforge-page-header eventforge-page-header--compact">
@@ -117,11 +129,21 @@ export function RegisterPage() {
       </header>
 
       <form className="eventforge-form-panel eventforge-event-form" onSubmit={handleSubmit}>
+        {/* ── Ticket selector ── */}
         <label className="eventforge-field">
-          <span>Select ticket</span>
-          <select className="eventforge-input" value={ticketId} onChange={(event) => setTicketId(event.target.value)} required>
-            <option value="">Choose a ticket</option>
-            {tickets.map((ticket) => <option key={ticket._id} value={ticket._id}>{ticket.name} · {formatCurrency(ticket.price, ticket.currency)}</option>)}
+          <span><TicketIcon size={14} aria-hidden="true" style={{ display: 'inline', marginRight: 4 }} />Select a ticket</span>
+          <select
+            className="eventforge-input"
+            value={ticketId}
+            onChange={(e) => setTicketId(e.target.value)}
+            required
+          >
+            <option value="">— Choose a ticket —</option>
+            {tickets.map((ticket) => (
+              <option key={ticket._id} value={ticket._id}>
+                {ticket.name} · {ticket.price === 0 ? 'FREE' : formatCurrency(ticket.price, ticket.currency)} · {ticket.remainingCount} left
+              </option>
+            ))}
           </select>
         </label>
 
@@ -150,29 +172,13 @@ export function RegisterPage() {
             <input className="eventforge-input" value={attendeeDetails.phone} onChange={(event) => setAttendeeDetails((current) => ({ ...current, phone: event.target.value }))} />
           </label>
           <label className="eventforge-field">
-            <span>Job title</span>
-            <input className="eventforge-input" value={attendeeDetails.jobTitle} onChange={(event) => setAttendeeDetails((current) => ({ ...current, jobTitle: event.target.value }))} />
-          </label>
-          <label className="eventforge-field">
             <span>Quantity</span>
             <input className="eventforge-input" type="number" min="1" max={selectedTicket?.maxPerAttendee || 100} value={quantity} onChange={(event) => setQuantity(Math.max(1, Number(event.target.value) || 1))} />
           </label>
         </div>
 
-        <label className="eventforge-field">
-          <span>Coupon code</span>
-          <input className="eventforge-input" value={couponCode} onChange={(event) => setCouponCode(event.target.value)} placeholder="Optional" />
-          {applicableCoupon ? <small className="eventforge-field-success">{applicableCoupon.discountType === 'PERCENTAGE' ? `${applicableCoupon.discountValue}%` : formatCurrency(applicableCoupon.discountValue, selectedTicket?.currency)} available.</small> : couponCode ? <small className="eventforge-field-error">Coupon is unavailable or does not qualify.</small> : null}
-        </label>
-
-        <label className="eventforge-field">
-          <span>Notes</span>
-          <textarea className="eventforge-textarea" value={notes} onChange={(event) => setNotes(event.target.value)} placeholder="Optional notes" />
-        </label>
-
         <div className="eventforge-summary-card">
           <div><span>Subtotal</span><strong>{formatCurrency(subtotal, selectedTicket?.currency)}</strong></div>
-          <div><span>Discount</span><strong>- {formatCurrency(discount, selectedTicket?.currency)}</strong></div>
           <div><span>Total</span><strong>{formatCurrency(total, selectedTicket?.currency)}</strong></div>
         </div>
 
