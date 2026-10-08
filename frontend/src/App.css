@@ -1,0 +1,2069 @@
+@keyframes eventforge-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.eventforge-app {
+  min-height: 100vh;
+  color: var(--color-white);
+  background: var(--color-black);
+}
+
+.eventforge-app main {
+  width: min(1400px, calc(100% - 56px));
+  margin: 0 auto;
+}
+
+.eventforge-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: min(1400px, calc(100% - 56px));
+  height: 82px;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--color-border);
+  background: rgba(5, 5, 5, 0.82);
+  backdrop-filter: blur(16px);
+}
+
+.eventforge-brand,
+.eventforge-nav a,
+.eventforge-link {
+  color: var(--color-white);
+  text-decoration: none;
+}
+
+.eventforge-brand {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+}
+
+.eventforge-navbar__center {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.eventforge-navbar__center span {
+  font-style: italic;
+}
+
+.eventforge-nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.25rem, 3vw, 3rem);
+}
+
+.eventforge-nav a,
+.eventforge-menu {
+  color: var(--color-muted);
+  font-size: 0.73rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: color 180ms ease;
+}
+
+.eventforge-nav a:hover,
+.eventforge-nav a:focus-visible,
+.eventforge-menu:hover,
+.eventforge-menu:focus-visible {
+  color: var(--color-white);
+}
+
+.eventforge-nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-left: auto;
+}
+
+.eventforge-nav__button {
+  min-width: 110px;
+  justify-content: center;
+}
+
+.eventforge-nav__dashboard,
+.eventforge-nav__logout {
+  color: var(--color-muted);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.eventforge-nav__logout {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.eventforge-menu {
+  display: none;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.eventforge-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-height: calc(100vh - 82px);
+  gap: 2rem;
+  padding: clamp(2rem, 5vw, 4rem) 0;
+}
+
+.eventforge-hero__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 900px;
+  width: 100%;
+}
+
+.eventforge-hero__content h1 {
+  margin: 0.8rem 0 0;
+  font-size: clamp(3.5rem, 7.5vw, 7.5rem);
+  line-height: 0.88;
+  letter-spacing: -0.07em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.eventforge-hero__content h1 span {
+  display: inline-block;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.eventforge-hero__content > p {
+  max-width: 42rem;
+  margin: 1.5rem auto 0;
+  color: var(--color-muted);
+  font-size: clamp(1rem, 1.6vw, 1.22rem);
+  line-height: 1.65;
+  text-align: center;
+}
+
+.eventforge-eyebrow {
+  display: inline-block;
+  color: var(--color-muted);
+  font-size: 0.67rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.eventforge-hero__actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.eventforge-hero__actions .eventforge-button {
+  min-width: 190px;
+  justify-content: center;
+}
+
+.eventforge-feature-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem 2rem;
+  margin: 2.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.eventforge-feature-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--color-subtle);
+  font-size: 0.74rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.eventforge-feature-list svg {
+  color: var(--color-white);
+}
+
+.eventforge-hero__visual {
+  position: relative;
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  min-height: auto;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.eventforge-visual-label {
+  display: none;
+}
+
+.eventforge-carousel-shell {
+  position: relative;
+  width: 100%;
+  height: clamp(580px, 70vh, 820px);
+  margin-top: 0;
+  border: none;
+  background: transparent;
+  overflow: visible;
+}
+
+.eventforge-hero__side {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  pointer-events: none;
+}
+
+.eventforge-hero__side--left {
+  left: clamp(2rem, 5vw, 6rem);
+}
+
+.eventforge-hero__side--right {
+  right: clamp(2rem, 5vw, 6rem);
+}
+
+.eventforge-side-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.1rem 1.4rem;
+  min-width: 170px;
+  border: 1px solid var(--color-border);
+  background: rgba(12, 12, 12, 0.75);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.45);
+  pointer-events: auto;
+  transition: transform 220ms ease, border-color 220ms ease;
+  animation: eventforge-float 6s ease-in-out infinite;
+}
+
+.eventforge-side-card--alt {
+  animation-delay: -3s;
+}
+
+.eventforge-side-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.eventforge-side-card__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--color-muted);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+
+.eventforge-side-card__val {
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: var(--color-white);
+}
+
+.eventforge-side-card__lbl {
+  margin-top: 0.3rem;
+  color: var(--color-subtle);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 1100px) {
+  .eventforge-hero__side {
+    display: none;
+  }
+}
+
+@keyframes eventforge-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(7px);
+  }
+}
+
+.eventforge-scroll-down {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-top: 1rem;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  color: var(--color-muted);
+  background: rgba(255, 255, 255, 0.03);
+  text-decoration: none;
+  transition: color 180ms ease, border-color 180ms ease, background 180ms ease;
+  animation: eventforge-bounce 2s infinite ease-in-out;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.eventforge-scroll-down:hover,
+.eventforge-scroll-down:focus-visible {
+  color: var(--color-white);
+  border-color: var(--color-white);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.eventforge-signin-card {
+  position: absolute;
+  right: clamp(1.25rem, 6vw, 6rem);
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  width: min(260px, 52%);
+  padding: 1.4rem;
+  border: 1px solid var(--color-border);
+  background: rgba(10, 10, 10, 0.94);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.42);
+}
+
+.eventforge-signin-card h2 {
+  margin: 0.6rem 0 1.2rem;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1;
+  letter-spacing: -0.06em;
+}
+
+.eventforge-signin-card__button {
+  width: fit-content;
+}
+
+.eventforge-section {
+  padding: clamp(4rem, 8vw, 8rem) 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.eventforge-section__heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 2.75rem;
+}
+
+.eventforge-section__heading h2 {
+  margin: 0;
+  font-size: clamp(2.8rem, 6.5vw, 6rem);
+  line-height: 0.96;
+  letter-spacing: -0.07em;
+  text-transform: uppercase;
+}
+
+.eventforge-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background: var(--color-border);
+}
+
+.eventforge-stat-card {
+  display: flex;
+  min-height: 210px;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(1.5rem, 3vw, 2.2rem);
+  background: var(--color-surface);
+}
+
+.eventforge-stat-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--color-muted);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.eventforge-stat-card strong {
+  font-size: clamp(2.25rem, 5vw, 4.25rem);
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+}
+
+.eventforge-stat-card small {
+  color: var(--color-muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+}
+
+.eventforge-events-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.eventforge-event-card {
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  transition: border-color 180ms ease, transform 180ms ease;
+}
+
+.eventforge-event-card:hover {
+  border-color: var(--color-muted);
+}
+
+.eventforge-event-card__image {
+  display: grid;
+  min-height: 300px;
+  align-items: end;
+  padding: 1.25rem;
+  background-position: center;
+  background-size: cover;
+  filter: grayscale(100%) contrast(1.12);
+}
+
+.eventforge-event-card__image span {
+  width: fit-content;
+  padding: 0.45rem 0.65rem;
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  background: rgba(0, 0, 0, 0.52);
+  font-size: 0.67rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.eventforge-event-card__body {
+  padding: 1.6rem;
+}
+
+.eventforge-meta {
+  margin: 0 0 0.9rem;
+  color: var(--color-muted);
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.eventforge-event-card h3 {
+  margin: 0;
+  font-size: clamp(1.5rem, 2vw, 2.1rem);
+  line-height: 1;
+  letter-spacing: -0.06em;
+  text-transform: uppercase;
+}
+
+.eventforge-event-card__details {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.4rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--color-border);
+  color: var(--color-muted);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.eventforge-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.65rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.eventforge-about-card {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr auto;
+  align-items: end;
+  gap: 2rem;
+  min-height: 280px;
+  padding: clamp(2rem, 5vw, 4rem);
+}
+
+.eventforge-about-card h2 {
+  margin: 0.9rem 0 0;
+  font-size: clamp(2.5rem, 6vw, 5.5rem);
+  line-height: 0.94;
+  letter-spacing: -0.07em;
+}
+
+.eventforge-about-card p {
+  max-width: 30rem;
+  margin: 0;
+  color: var(--color-subtle);
+  font-size: 1.02rem;
+  line-height: 1.7;
+}
+
+.eventforge-about-card__meta {
+  display: flex;
+  gap: 1.5rem;
+  color: var(--color-muted);
+  font-size: 0.68rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.eventforge-about-card__meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.eventforge-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  min-height: 46px;
+  padding: 0 1.25rem;
+  border: 1px solid transparent;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.eventforge-button--primary {
+  color: var(--color-black);
+  background: var(--color-white);
+}
+
+.eventforge-button--primary:hover,
+.eventforge-button--primary:focus-visible {
+  background: var(--color-light);
+}
+
+.eventforge-button--secondary,
+.eventforge-button--ghost {
+  color: var(--color-white);
+  border-color: var(--color-border);
+  background: transparent;
+}
+
+.eventforge-button--secondary:hover,
+.eventforge-button--secondary:focus-visible,
+.eventforge-button--ghost:hover,
+.eventforge-button--ghost:focus-visible {
+  border-color: var(--color-muted);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.eventforge-button:focus-visible,
+.eventforge-link:focus-visible,
+.eventforge-nav a:focus-visible,
+.eventforge-brand:focus-visible,
+.eventforge-menu:focus-visible,
+.eventforge-input:focus-visible {
+  outline: 1px solid var(--color-white);
+  outline-offset: 3px;
+}
+
+.eventforge-card {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.eventforge-field {
+  display: grid;
+  gap: 0.5rem;
+  color: var(--color-muted);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.eventforge-input {
+  width: 100%;
+  min-height: 46px;
+  padding: 0 0.95rem;
+  border: 1px solid var(--color-border);
+  color: var(--color-white);
+  background: var(--color-black);
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 180ms ease;
+}
+
+.eventforge-input::placeholder {
+  color: var(--color-muted);
+}
+
+.eventforge-input:focus {
+  border-color: var(--color-white);
+}
+
+.eventforge-stat-card,
+.eventforge-event-card,
+.eventforge-card,
+.eventforge-button,
+.eventforge-input {
+  will-change: transform;
+}
+
+.eventforge-empty-state {
+  padding: clamp(2.5rem, 7vw, 5rem);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  text-align: center;
+}
+
+.eventforge-empty-state h2 {
+  margin: 0.9rem 0 0.75rem;
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 1;
+  letter-spacing: -0.06em;
+  text-transform: uppercase;
+}
+
+.eventforge-empty-state p {
+  max-width: 36rem;
+  margin: 0 auto;
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+
+.eventforge-empty-state__action {
+  margin-top: 1.75rem;
+}
+
+.eventforge-auth-page {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  min-height: 100vh;
+  color: var(--color-white);
+  background: var(--color-black);
+}
+
+.eventforge-auth-page--compact {
+  grid-template-columns: minmax(0, 0.76fr) minmax(0, 1.24fr);
+}
+
+.eventforge-auth-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(3rem, 7vw, 7rem);
+  border-right: 1px solid var(--color-border);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.015), rgba(255, 255, 255, 0));
+}
+
+.eventforge-auth-brand {
+  color: var(--color-white);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-decoration: none;
+}
+
+.eventforge-auth-copy h1 {
+  margin: 2rem 0 1.5rem;
+  font-size: clamp(4rem, 8vw, 8rem);
+  line-height: 0.82;
+  letter-spacing: -0.08em;
+  text-transform: uppercase;
+}
+
+.eventforge-auth-copy h1 span {
+  font-style: italic;
+  font-weight: 500;
+}
+
+.eventforge-auth-description {
+  max-width: 34rem;
+  color: var(--color-muted);
+  font-size: 1.08rem;
+  line-height: 1.7;
+}
+
+.eventforge-auth-features {
+  display: grid;
+  gap: 0.9rem;
+  margin: 2rem 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--color-subtle);
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.eventforge-auth-features li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.eventforge-auth-visual {
+  display: grid;
+  place-items: center;
+  padding: clamp(2rem, 6vw, 6rem);
+}
+
+.eventforge-auth-carousel {
+  width: min(100%, 680px);
+}
+
+.eventforge-auth-card,
+.eventforge-register-card {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 420px);
+  margin-top: -3.5rem;
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  border-radius: 18px;
+  background: rgba(12, 12, 12, 0.96);
+  box-shadow: 0 38px 140px rgba(0, 0, 0, 0.5);
+}
+
+.eventforge-auth-card__header h2 {
+  margin: 0.8rem 0 1.8rem;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 0.95;
+  letter-spacing: -0.07em;
+}
+
+.eventforge-input-shell {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 50px;
+  padding: 0 0.9rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-black);
+  transition: border-color 180ms ease;
+}
+
+.eventforge-input-shell:focus-within {
+  border-color: var(--color-white);
+}
+
+.eventforge-input-shell svg {
+  color: var(--color-muted);
+  flex-shrink: 0;
+}
+
+.eventforge-input-shell input,
+.eventforge-field select {
+  width: 100%;
+  min-height: 48px;
+  border: 0;
+  color: var(--color-white);
+  background: transparent;
+  font: inherit;
+  outline: none;
+}
+
+.eventforge-input-shell input::placeholder {
+  color: var(--color-muted);
+}
+
+.eventforge-field select {
+  min-height: 50px;
+  padding: 0 0.9rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-black);
+  appearance: none;
+}
+
+.eventforge-password-toggle {
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  color: var(--color-muted);
+  background: transparent;
+  cursor: pointer;
+}
+
+.eventforge-auth-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 1.2rem 0 1.45rem;
+}
+
+.eventforge-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--color-muted);
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.eventforge-checkbox input {
+  accent-color: var(--color-white);
+}
+
+.eventforge-field--compact {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.eventforge-field-success {
+  color: #b8d7b0;
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+}
+
+.eventforge-text-link,
+.eventforge-auth-footer a,
+.eventforge-primary-link {
+  color: var(--color-white);
+  text-decoration: none;
+}
+
+.eventforge-text-link,
+.eventforge-auth-footer {
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.eventforge-auth-submit {
+  width: 100%;
+  margin-top: 0.8rem;
+}
+
+.eventforge-auth-footer {
+  margin: 1.25rem 0 0;
+  color: var(--color-muted);
+  text-align: center;
+}
+
+.eventforge-auth-footer a {
+  margin-left: 0.45rem;
+}
+
+.eventforge-loading-screen {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  color: var(--color-muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.eventforge-dashboard-shell {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  min-height: 100vh;
+  background: var(--color-black);
+}
+
+.eventforge-sidebar {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--color-border);
+  background: rgba(20, 20, 20, 0.92);
+}
+
+.eventforge-sidebar__brand {
+  padding: 2rem 1.5rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+}
+
+.eventforge-sidebar__nav {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0 1rem;
+}
+
+.eventforge-sidebar__link {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-height: 46px;
+  padding: 0 1rem;
+  color: var(--color-muted);
+  border: 1px solid transparent;
+  text-decoration: none;
+  transition: color 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.eventforge-sidebar__link:hover,
+.eventforge-sidebar__link:focus-visible,
+.eventforge-sidebar__link.active {
+  color: var(--color-white);
+  border-color: var(--color-border);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.eventforge-sidebar__account {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: auto;
+  padding: 1.5rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.eventforge-sidebar__account strong,
+.eventforge-sidebar__account span {
+  display: block;
+}
+
+.eventforge-sidebar__account strong {
+  font-size: 0.8rem;
+}
+
+.eventforge-sidebar__account span,
+.eventforge-dashboard__panel p,
+.eventforge-settings-card span {
+  color: var(--color-muted);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.eventforge-sidebar__logout {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  width: fit-content;
+  padding: 0;
+  border: 0;
+  color: var(--color-white);
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.eventforge-dashboard-main {
+  min-width: 0;
+  padding: clamp(2.5rem, 6vw, 5rem);
+}
+
+.eventforge-dashboard,
+.eventforge-settings-page {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.eventforge-dashboard__header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.eventforge-dashboard__header h1,
+.eventforge-settings-page h1 {
+  margin: 0.6rem 0 0;
+  font-size: clamp(2.8rem, 6vw, 5.2rem);
+  line-height: 0.96;
+  letter-spacing: -0.07em;
+  text-transform: uppercase;
+}
+
+.eventforge-primary-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.eventforge-stat-grid .eventforge-stat-card {
+  min-height: 170px;
+}
+
+.eventforge-dashboard__panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-top: 2rem;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.eventforge-dashboard__panel h2 {
+  margin: 0.7rem 0 0.5rem;
+  font-size: clamp(1.6rem, 4vw, 3rem);
+  letter-spacing: -0.06em;
+  text-transform: uppercase;
+}
+
+.eventforge-dashboard__badge {
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--color-border);
+  color: var(--color-subtle);
+  font-size: 0.67rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.eventforge-settings-card {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.eventforge-settings-card > div {
+  display: flex;
+  min-height: 150px;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+  border-right: 1px solid var(--color-border);
+}
+
+.eventforge-settings-card > div:last-child {
+  border-right: 0;
+}
+
+.eventforge-settings-card strong {
+  margin-top: 0.7rem;
+  font-size: clamp(1.1rem, 2vw, 1.7rem);
+}
+
+.eventforge-event-page {
+  width: min(1100px, 100%);
+  margin: 0 auto;
+  padding: clamp(2rem, 5vw, 5rem) 0;
+}
+
+.eventforge-page-header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.eventforge-page-header h1 {
+  margin: 0.6rem 0 0;
+  font-size: clamp(2.7rem, 6vw, 5.3rem);
+  line-height: 0.96;
+  letter-spacing: -0.07em;
+  text-transform: uppercase;
+}
+
+.eventforge-page-header--compact {
+  align-items: center;
+}
+
+.eventforge-page-subtitle {
+  margin-top: 0.8rem;
+  color: var(--color-muted);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.eventforge-event-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.eventforge-search {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: 0.65rem;
+  min-height: 48px;
+  padding: 0 0.9rem;
+  border: 1px solid var(--color-border);
+  color: var(--color-muted);
+  background: var(--color-black);
+}
+
+.eventforge-search input {
+  width: 100%;
+  border: 0;
+  color: var(--color-white);
+  background: transparent;
+  outline: none;
+  font: inherit;
+}
+
+.eventforge-toolbar__selects {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.eventforge-toolbar__selects label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  padding: 0 0.8rem;
+  border: 1px solid var(--color-border);
+  color: var(--color-muted);
+  background: var(--color-black);
+}
+
+.eventforge-toolbar__selects select {
+  border: 0;
+  color: var(--color-white);
+  background: transparent;
+  font: inherit;
+  outline: none;
+}
+
+.eventforge-event-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.eventforge-event-card {
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.eventforge-event-card__image {
+  min-height: 220px;
+  padding: 1rem;
+  background-position: center;
+  background-size: cover;
+  filter: grayscale(100%) contrast(1.12);
+}
+
+.eventforge-event-card__image span {
+  display: inline-block;
+  padding: 0.45rem 0.6rem;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(0, 0, 0, 0.55);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.eventforge-event-card__body {
+  padding: 1.5rem;
+}
+
+.eventforge-event-card__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  color: var(--color-muted);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.eventforge-status {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 0.38rem 0.55rem;
+  border: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.03);
+  font-size: 0.6rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.eventforge-status--draft { color: var(--color-subtle); }
+.eventforge-status--published { color: #d7d7d7; }
+.eventforge-status--ongoing { color: #ffffff; }
+.eventforge-status--completed { color: #a3a3a3; }
+.eventforge-status--cancelled { color: #d9a7a7; }
+
+.eventforge-event-card h2 {
+  margin: 1rem 0 0.7rem;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  line-height: 1;
+  letter-spacing: -0.06em;
+  text-transform: uppercase;
+}
+
+.eventforge-event-card__date,
+.eventforge-event-card__location {
+  color: var(--color-muted);
+  font-size: 0.8rem;
+}
+
+.eventforge-event-card__location {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.65rem;
+}
+
+.eventforge-event-card__details {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border);
+  color: var(--color-muted);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.eventforge-event-card__details span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.eventforge-event-page--form {
+  max-width: 900px;
+}
+
+.eventforge-form-panel {
+  padding: clamp(1.5rem, 4vw, 3rem);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.eventforge-event-form {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.eventforge-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.eventforge-form-grid--main {
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.6fr);
+}
+
+.eventforge-textarea {
+  width: 100%;
+  min-height: 140px;
+  padding: 0.9rem;
+  border: 1px solid var(--color-border);
+  color: var(--color-white);
+  background: var(--color-black);
+  outline: none;
+  resize: vertical;
+}
+
+.eventforge-textarea:focus,
+.eventforge-input:focus {
+  border-color: var(--color-white);
+}
+
+.eventforge-input--inline {
+  border: 0;
+  min-height: 30px;
+  padding: 0;
+}
+
+.eventforge-field-error {
+  color: #d9a7a7;
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+}
+
+.eventforge-form-error {
+  margin: 0;
+  color: #d9a7a7;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+}
+
+.eventforge-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding-top: 0.5rem;
+}
+
+.eventforge-resource-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.eventforge-resource-card {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1.25rem;
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.eventforge-resource-card__icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.eventforge-resource-card__content {
+  min-width: 0;
+}
+
+.eventforge-resource-card__content h2 {
+  margin: 0.7rem 0 0.5rem;
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+}
+
+.eventforge-resource-card__content p {
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+
+.eventforge-ticket-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem 1.4rem;
+  margin-top: 1rem;
+  color: var(--color-muted);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.eventforge-ticket-meta strong {
+  color: var(--color-white);
+}
+
+.eventforge-resource-card__topline,
+.eventforge-resource-card__actions,
+.eventforge-session-card__meta,
+.eventforge-session-card__venue {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.eventforge-resource-card__topline,
+.eventforge-session-card__meta,
+.eventforge-session-card__venue {
+  color: var(--color-muted);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.eventforge-resource-card__actions {
+  align-self: end;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.eventforge-resource-card__actions a,
+.eventforge-resource-card__actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-white);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.eventforge-resource-card__actions button:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+
+.eventforge-resource-meta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.7rem;
+  margin: 1.25rem 0 0;
+}
+
+.eventforge-resource-meta div {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.eventforge-resource-meta dt,
+.eventforge-resource-meta dd {
+  margin: 0;
+}
+
+.eventforge-resource-meta dt {
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.eventforge-resource-meta dd {
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.eventforge-action-stack {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.eventforge-action-stack .eventforge-primary-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.eventforge-schedule-filters {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.eventforge-schedule-filters label {
+  display: grid;
+  gap: 0.45rem;
+  color: var(--color-muted);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.eventforge-schedule-filters input,
+.eventforge-schedule-filters select {
+  width: 100%;
+  min-height: 42px;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--color-border);
+  color: var(--color-white);
+  background: var(--color-black);
+}
+
+.eventforge-schedule-filters__search {
+  position: relative;
+}
+
+.eventforge-schedule-filters__search svg {
+  position: absolute;
+  right: 0.9rem;
+  bottom: 0.9rem;
+  color: var(--color-muted);
+}
+
+.eventforge-schedule-filters__search input {
+  padding-right: 2.4rem;
+}
+
+.eventforge-schedule-list {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.eventforge-schedule-item {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.25rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.eventforge-schedule-item__time {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.eventforge-schedule-item__time strong {
+  font-size: 1.1rem;
+}
+
+.eventforge-schedule-item__time span {
+  color: var(--color-muted);
+}
+
+.eventforge-schedule-item__content {
+  min-width: 0;
+}
+
+.eventforge-schedule-item__content h2 {
+  margin: 0.65rem 0;
+  font-size: clamp(1.25rem, 2vw, 1.8rem);
+  line-height: 1.05;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+}
+
+.eventforge-schedule-item__content p {
+  margin: 0;
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+
+.eventforge-session-card__meta {
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin-top: 0.9rem;
+}
+
+.eventforge-session-card__meta span,
+.eventforge-session-card__venue {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.38rem;
+}
+
+.eventforge-session-card__venue {
+  margin-top: 0.7rem;
+}
+
+.eventforge-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-muted);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.68rem;
+}
+
+.eventforge-detail-header {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.eventforge-detail-header__main {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.eventforge-detail-header__main h1 {
+  margin: 0.5rem 0 0;
+  font-size: clamp(2.5rem, 7vw, 6.2rem);
+  line-height: 0.96;
+  letter-spacing: -0.07em;
+  text-transform: uppercase;
+}
+
+.eventforge-detail-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.eventforge-detail-hero {
+  min-height: 260px;
+  display: flex;
+  align-items: end;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  border: 1px solid var(--color-border);
+  background-position: center;
+  background-size: cover;
+}
+
+.eventforge-detail-hero p,
+.eventforge-detail-hero h2 {
+  max-width: 700px;
+}
+
+.eventforge-detail-hero h2 {
+  margin: 0.5rem 0;
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+  text-transform: uppercase;
+}
+
+.eventforge-detail-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+}
+
+.eventforge-detail-tabs button {
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--color-border);
+  color: var(--color-muted);
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.62rem;
+}
+
+.eventforge-detail-tabs .active {
+  color: var(--color-white);
+  border-color: var(--color-white);
+}
+
+.eventforge-detail-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.7fr);
+  gap: 1rem;
+}
+
+.eventforge-detail-panel {
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.eventforge-detail-panel h2 {
+  margin: 0 0 1rem;
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  line-height: 1;
+  letter-spacing: -0.06em;
+  text-transform: uppercase;
+}
+
+.eventforge-detail-panel > p {
+  color: var(--color-muted);
+  line-height: 1.8;
+}
+
+.eventforge-detail-list {
+  display: grid;
+  gap: 0.9rem;
+  margin: 1.5rem 0 0;
+}
+
+.eventforge-detail-list div {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 1rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.eventforge-detail-list dt,
+.eventforge-detail-list dd {
+  margin: 0;
+}
+
+.eventforge-detail-list dt {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-muted);
+  font-size: 0.68rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.eventforge-detail-list dd {
+  color: var(--color-light);
+  line-height: 1.6;
+}
+
+.eventforge-detail-panel--sidebar .eventforge-stat-card {
+  min-height: 130px;
+}
+
+.eventforge-detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.eventforge-detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.eventforge-detail-actions a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.eventforge-detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.eventforge-detail-actions a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.eventforge-detail-meta div {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-border);
+  color: var(--color-subtle);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.eventforge-detail-meta a {
+  color: var(--color-white);
+  text-decoration: none;
+}
+
+.eventforge-detail-danger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border: 1px solid #3a2a2a;
+  background: rgba(74, 28, 28, 0.08);
+}
+
+.eventforge-detail-danger h2 {
+  margin: 0.5rem 0 0;
+  font-size: clamp(1.3rem, 3vw, 2rem);
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+}
+
+.eventforge-coming-soon {
+  display: grid;
+  place-items: center;
+  min-height: 220px;
+  padding: 2rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  text-align: center;
+}
+
+.eventforge-coming-soon h2 {
+  margin: 0.75rem 0 0.5rem;
+  font-size: clamp(1.7rem, 4vw, 3rem);
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+}
+
+.eventforge-coming-soon p {
+  color: var(--color-muted);
+}
+
+.eventforge-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.eventforge-modal {
+  width: min(100%, 480px);
+  padding: clamp(1.75rem, 5vw, 3rem);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.eventforge-modal__icon {
+  display: inline-grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  color: #f0a1a1;
+  border: 1px solid #3a2a2a;
+  background: rgba(99, 39, 39, 0.2);
+}
+
+.eventforge-modal h2 {
+  margin: 1.2rem 0 0.7rem;
+  font-size: clamp(1.9rem, 5vw, 2.8rem);
+  letter-spacing: -0.06em;
+  text-transform: uppercase;
+}
+
+.eventforge-modal p {
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+
+.eventforge-modal__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.eventforge-loading-panel,
+.eventforge-error-panel {
+  display: grid;
+  place-items: center;
+  min-height: 220px;
+  margin-top: 2rem;
+  padding: 2rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  text-align: center;
+}
+
+.eventforge-error-panel strong {
+  font-size: clamp(1.3rem, 4vw, 2rem);
+}
+
+.eventforge-error-panel p {
+  margin: 0.8rem 0 1.5rem;
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+
+@media (max-width: 980px) {
+  .eventforge-hero {
+    min-height: auto;
+    gap: 2rem;
+  }
+
+  .eventforge-hero__visual {
+    min-height: auto;
+  }
+
+  .eventforge-stat-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .eventforge-events-grid,
+  .eventforge-event-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .eventforge-about-card,
+  .eventforge-detail-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 740px) {
+  .eventforge-app main,
+  .eventforge-navbar {
+    width: min(100% - 28px, 1400px);
+  }
+
+  .eventforge-nav {
+    display: none;
+  }
+
+  .eventforge-menu {
+    display: grid;
+    place-items: center;
+  }
+
+  .eventforge-hero__content h1 {
+    font-size: clamp(2.6rem, 14vw, 4.5rem);
+  }
+
+  .eventforge-hero__actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .eventforge-hero__visual {
+    min-height: auto;
+  }
+
+  .eventforge-carousel-shell {
+    height: 420px;
+  }
+
+  .eventforge-signin-card {
+    right: 0;
+    width: min(220px, 68%);
+  }
+
+  .eventforge-section__heading,
+  .eventforge-page-header,
+  .eventforge-detail-header__main,
+  .eventforge-detail-danger {
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .eventforge-stat-grid,
+  .eventforge-form-grid,
+  .eventforge-form-grid--main {
+    grid-template-columns: 1fr;
+  }
+
+  .eventforge-about-card__meta,
+  .eventforge-event-toolbar,
+  .eventforge-toolbar__selects,
+  .eventforge-form-actions {
+    flex-direction: column;
+  }
+
+  .eventforge-toolbar__selects {
+    width: 100%;
+  }
+
+  .eventforge-toolbar__selects label {
+    width: 100%;
+  }
+
+  .eventforge-about-card__meta {
+    gap: 0.75rem;
+  }
+
+  .eventforge-detail-list div {
+    grid-template-columns: 1fr;
+    gap: 0.45rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+  .eventforge-app main,
+  .eventforge-navbar {
+    width: min(100% - 28px, 1400px);
+  }
+
+  .eventforge-nav {
+    display: none;
+  }
+
+  .eventforge-menu {
+    display: grid;
+    place-items: center;
+  }
+
+  .eventforge-hero__content h1 {
+    font-size: clamp(3rem, 18vw, 5rem);
+  }
+
+  .eventforge-hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .eventforge-hero__actions .eventforge-button,
+  .eventforge-signin-card__button {
+    width: 100%;
+  }
+
+  .eventforge-hero__visual {
+    min-height: 600px;
+  }
+
+  .eventforge-carousel-shell {
+    height: 500px;
+  }
+
+  .eventforge-signin-card {
+    right: 0;
+    width: min(220px, 68%);
+  }
+
+  .eventforge-section__heading {
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .eventforge-stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .eventforge-about-card__meta {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

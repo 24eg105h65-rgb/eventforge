@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "init": "^0.1.2",
+    "react-hook-form": "^7.89.0",
+    "tailwindcss": "^4.3.3"
+  }
+}
