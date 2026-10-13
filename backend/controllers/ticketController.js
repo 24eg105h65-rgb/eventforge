@@ -5,7 +5,31 @@ const { getEventForTicketRequest, getTicketForEvent, serializeTicket } = require
 const listTickets = async (req, res, next) => {
   try {
     const event = await getEventForTicketRequest(req.user, req.params.id, 'read');
-    const tickets = await Ticket.find({ event: event._id }).sort({ price: 1, name: 1 });
+    let tickets = await Ticket.find({ event: event._id }).sort({ price: 1, name: 1 });
+
+    // Auto-seed a default ticket for events that have none so attendees can always register.
+    if (tickets.length === 0) {
+      try {
+        const defaultTicket = await Ticket.create({
+          event: event._id,
+          name: 'General Admission',
+          description: 'Standard entry ticket.',
+          type: 'FREE',
+          price: 0,
+          currency: 'INR',
+          capacity: event.capacity || 100,
+          active: true,
+          requiresApproval: false,
+          maxPerAttendee: 5,
+          createdBy: event.createdBy,
+        });
+        tickets = [defaultTicket];
+      } catch (_seedErr) {
+        // If seed fails (e.g. duplicate), re-fetch
+        tickets = await Ticket.find({ event: event._id }).sort({ price: 1, name: 1 });
+      }
+    }
+
     const data = tickets.map((ticket) => ({
       ...serializeTicket(ticket),
       remainingCount: Math.max(ticket.capacity - ticket.soldCount, 0),

@@ -1,4 +1,5 @@
 const Event = require('../models/Event');
+const Ticket = require('../models/Ticket');
 const User = require('../models/User');
 
 const getEventScope = (user) => {
@@ -127,6 +128,26 @@ const createEvent = async (req, res, next) => {
       slug: createSlug(req.body.name),
     };
     const event = await Event.create(payload);
+
+    // Auto-create a default General Admission ticket so attendees can register immediately.
+    // Organizers can edit or add more tickets from the Manage Tickets page.
+    try {
+      await Ticket.create({
+        event: event._id,
+        name: 'General Admission',
+        description: 'Standard entry ticket. Edit or replace this via Manage Tickets.',
+        type: 'FREE',
+        price: 0,
+        currency: 'INR',
+        capacity: event.capacity || 100,
+        active: true,
+        requiresApproval: false,
+        maxPerAttendee: 5,
+        createdBy: req.user._id,
+      });
+    } catch (_ticketErr) {
+      // Non-fatal: ticket creation failure should not block event creation.
+    }
 
     res.status(201).json({ success: true, message: 'Event created.', event: serializeEvent(event) });
   } catch (error) {
