@@ -57,7 +57,7 @@ export function EventDetailsPage() {
         setAttendeeCount(
           registrationsResponse
             ? registrationsResponse.data.reduce((total, registration) => total + Number(registration.quantity || 0), 0)
-            : Number(overviewResponse.data.totalRegistrations || 0),
+            : Number(overviewResponse.data.totalAttendance || overviewResponse.data.totalRegistrations || 0),
         );
         if (ticketsResponse !== null) {
           setTicketCount(Array.isArray(ticketsResponse.data) ? ticketsResponse.data.length : 0);

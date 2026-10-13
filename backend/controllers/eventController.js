@@ -1,6 +1,8 @@
 const Event = require('../models/Event');
 const Ticket = require('../models/Ticket');
 const User = require('../models/User');
+const Registration = require('../models/Registration');
+const Session = require('../models/Session');
 
 const getEventScope = (user) => {
   if (user.role === 'platform_admin') {
@@ -218,10 +220,20 @@ const getEventOverview = async (req, res, next) => {
       throw error;
     }
 
-    const totalRegistrations = 0;
-    const totalAttendance = 0;
-    const totalSessions = 0;
-    const totalSpeakers = 0;
+    // Count active registrations (CONFIRMED + PENDING) and sum attendee quantities
+    const [regAgg, sessionDocs] = await Promise.all([
+      Registration.aggregate([
+        { $match: { event: event._id, status: { $in: ['CONFIRMED', 'PENDING', 'WAITLISTED'] } } },
+        { $group: { _id: null, totalRegistrations: { $sum: 1 }, totalAttendance: { $sum: '$quantity' } } },
+      ]),
+      Session.find({ event: event._id }).select('speakers').lean(),
+    ]);
+
+    const totalRegistrations = regAgg[0]?.totalRegistrations || 0;
+    const totalAttendance = regAgg[0]?.totalAttendance || 0;
+    const totalSessions = sessionDocs.length;
+    const speakerIds = new Set(sessionDocs.flatMap((s) => (s.speakers || []).map((sp) => sp.toString())));
+    const totalSpeakers = speakerIds.size;
     const totalSponsors = 0;
 
     res.json({
@@ -234,7 +246,7 @@ const getEventOverview = async (req, res, next) => {
         totalRegistrations,
         totalAttendance,
         capacity: event.capacity,
-        registrationPercentage: event.capacity > 0 ? (totalRegistrations / event.capacity) * 100 : 0,
+        registrationPercentage: event.capacity > 0 ? Math.round((totalAttendance / event.capacity) * 100) : 0,
       },
     });
   } catch (error) {
