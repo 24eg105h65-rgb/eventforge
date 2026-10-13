@@ -2587,3 +2587,27 @@
   color: #fbbf24;
   text-transform: uppercase;
 }
+
+/* ── No-ticket warning banner (organizer view on EventDetailsPage) ── */
+.ef-no-ticket-warning {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem 1.4rem;
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  background: rgba(251, 191, 36, 0.07);
+  color: #fbbf24;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.ef-no-ticket-warning > svg {
+  flex-shrink: 0;
+}
+
+.ef-no-ticket-warning > span {
+  flex: 1;
+  min-width: 0;
+}

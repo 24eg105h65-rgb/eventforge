@@ -8,7 +8,7 @@ import { Button } from '../../components/ui/Button';
 import { EmptyState } from '../../components/ui/EmptyState';
 import { ConfirmDeleteModal } from '../../components/events/ConfirmDeleteModal';
 import { deleteEvent, getEvent, getEventOverview } from '../../services/eventService';
-import { getEventRegistrations } from '../../services/phase5Service';
+import { getEventRegistrations, getEventTickets } from '../../services/phase5Service';
 import { getSessions } from '../../services/sessionService';
 
 const tabs = ['Overview', 'Sessions', 'Schedule'];
@@ -28,6 +28,7 @@ export function EventDetailsPage() {
   const [overview, setOverview] = useState(null);
   const [sessions, setSessions] = useState([]);
   const [attendeeCount, setAttendeeCount] = useState(0);
+  const [ticketCount, setTicketCount] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [activeTab, setActiveTab] = useState('Overview');
@@ -45,7 +46,10 @@ export function EventDetailsPage() {
           getSessions(id),
         ]);
         const isRegistrationManager = user?.role === 'organizer' || user?.role === 'platform_admin';
-        const registrationsResponse = isRegistrationManager ? await getEventRegistrations(id) : null;
+        const [registrationsResponse, ticketsResponse] = await Promise.all([
+          isRegistrationManager ? getEventRegistrations(id) : Promise.resolve(null),
+          isRegistrationManager ? getEventTickets(id) : Promise.resolve(null),
+        ]);
 
         setEvent(eventResponse.data);
         setOverview(overviewResponse.data);
@@ -55,6 +59,9 @@ export function EventDetailsPage() {
             ? registrationsResponse.data.reduce((total, registration) => total + Number(registration.quantity || 0), 0)
             : Number(overviewResponse.data.totalRegistrations || 0),
         );
+        if (ticketsResponse !== null) {
+          setTicketCount(Array.isArray(ticketsResponse.data) ? ticketsResponse.data.length : 0);
+        }
       } catch (requestError) {
         setError(requestError.message || 'Event could not be loaded.');
       } finally {
@@ -175,6 +182,16 @@ export function EventDetailsPage() {
         {event.contactEmail ? <div><Mail size={15} /><span>{event.contactEmail}</span></div> : null}
         {event.website ? <div><Globe size={15} /><a href={event.website} target="_blank" rel="noreferrer">Website <ChevronRight size={12} /></a></div> : null}
       </section>
+
+      {isOwner && ticketCount === 0 ? (
+        <div className="ef-no-ticket-warning" role="alert">
+          <TicketIcon size={18} aria-hidden="true" />
+          <span>No tickets have been created for this event yet. Attendees cannot register until at least one ticket is added.</span>
+          <Button onClick={() => navigate(`/events/${id}/tickets/new`)} id="create-first-ticket-btn">
+            <TicketIcon size={14} aria-hidden="true" /> Create a Ticket
+          </Button>
+        </div>
+      ) : null}
 
       <section className="eventforge-detail-actions">
         {isOwner ? (
